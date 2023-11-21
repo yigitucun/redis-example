@@ -1,7 +1,7 @@
 package com.ali.redis.example.exceptions.businessException;
 
 
-import com.ali.authenticationservice.exceptions.ExceptionDetails;
+import com.ali.redis.example.exceptions.ExceptionDetails;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
