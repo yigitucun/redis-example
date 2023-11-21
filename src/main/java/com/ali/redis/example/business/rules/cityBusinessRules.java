@@ -20,5 +20,10 @@ public class CityBusinessRules {
             throw new BusinessException("Bu şehir önceden alınmış.",HttpStatus.BAD_REQUEST);
         }
     }
+    public void checkIfCityId(int id){
+        if (!this.cityRepository.existsById(id)){
+            throw new BusinessException("Böyle bir şehir bulunamadı.",HttpStatus.BAD_REQUEST);
+        }
+    }
 
 }
