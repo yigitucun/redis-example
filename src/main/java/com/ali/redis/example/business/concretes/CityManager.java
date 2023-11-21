@@ -5,7 +5,9 @@ import com.ali.redis.example.business.rules.CityBusinessRules;
 import com.ali.redis.example.dataAccess.abstracts.ICityRepository;
 import com.ali.redis.example.dto.requests.AddCityRequest;
 import com.ali.redis.example.dto.responses.ListCitiesResponse;
+import com.ali.redis.example.entities.concretes.City;
 import lombok.AllArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,17 +18,19 @@ public class CityManager implements CityService {
 
     private final ICityRepository cityRepository;
     private final CityBusinessRules cityBusinessRules;
+
+    @Cacheable(value = "cities",cacheNames = "cities")
     @Override
     public AddCityRequest add(AddCityRequest request) {
         this.cityBusinessRules.checkIfCityCity(request.getCity());
         this.cityBusinessRules.checkIfCityPlateCode(request.getPlateCode());
         this.cityRepository.save(request.toEntity(request));
         return request;
-
     }
-
     @Override
     public List<ListCitiesResponse> getAllCities() {
-        return null;
+        List<City> cities = this.cityRepository.findAll();
+        return ListCitiesResponse.getAll(cities);
     }
+
 }
