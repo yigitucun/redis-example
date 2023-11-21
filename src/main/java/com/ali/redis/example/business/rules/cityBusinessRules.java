@@ -11,7 +11,7 @@ public class CityBusinessRules {
 
     private ICityRepository cityRepository;
 
-    public void checkIfCityId(int id){
+    public void checkIfCityPlateCode(int id){
         if (this.cityRepository.existsByPlateCode(id)){
             throw new BusinessException("Bu plaka önceden alınmış.", HttpStatus.BAD_REQUEST);
         }
