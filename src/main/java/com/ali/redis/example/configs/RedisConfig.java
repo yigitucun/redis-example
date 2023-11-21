@@ -6,11 +6,11 @@ import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactor
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.repository.configuration.EnableRedisRepositories;
 
-import java.util.HashMap;
 
 @Configuration
 @EnableRedisRepositories
 public class RedisConfig {
+
     @Bean
     public LettuceConnectionFactory connectionFactory(){
         return new LettuceConnectionFactory();
