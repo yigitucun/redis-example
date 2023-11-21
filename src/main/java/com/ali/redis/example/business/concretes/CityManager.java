@@ -4,12 +4,15 @@ import com.ali.redis.example.business.abstracts.CityService;
 import com.ali.redis.example.business.rules.CityBusinessRules;
 import com.ali.redis.example.dataAccess.abstracts.ICityRepository;
 import com.ali.redis.example.dto.requests.AddCityRequest;
+import com.ali.redis.example.dto.requests.UpdateCityRequest;
 import com.ali.redis.example.dto.responses.ListCitiesResponse;
 import com.ali.redis.example.entities.concretes.City;
 import lombok.AllArgsConstructor;
 import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -38,5 +41,12 @@ public class CityManager implements CityService {
     public void deleteCity(int id) {
         this.cityBusinessRules.checkIfCityId(id);
         this.cityRepository.deleteById(id);
+    }
+    @Override
+    @CacheEvict(value = "cities",key = "#request.id",allEntries = true)
+    public UpdateCityRequest updateCity(UpdateCityRequest request) {
+        this.cityBusinessRules.checkIfCityId(request.getId());
+        this.cityRepository.save(request.toEntity(request));
+        return request;
     }
 }
