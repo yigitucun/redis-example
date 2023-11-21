@@ -23,4 +23,10 @@ public class CityController {
         return ResponseEntity.ok(this.cityService.getAllCities());
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteCity(@PathVariable int id){
+        this.cityService.deleteCity(id);
+        return new ResponseEntity<>("Başarıyla silindi.",HttpStatus.OK);
+    }
+
 }
