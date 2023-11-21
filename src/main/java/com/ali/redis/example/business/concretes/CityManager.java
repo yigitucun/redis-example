@@ -13,7 +13,8 @@ import java.util.List;
 @AllArgsConstructor
 public class CityManager implements CityService {
 
-    private ICityRepository cityRepository;
+    private final ICityRepository cityRepository;
+    private final C
     @Override
     public AddCityRequest add(AddCityRequest request) {
         return null;
