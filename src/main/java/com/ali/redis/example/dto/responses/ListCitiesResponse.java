@@ -3,11 +3,12 @@ package com.ali.redis.example.dto.responses;
 import com.ali.redis.example.entities.concretes.City;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Data
-public class ListCitiesResponse {
+public class ListCitiesResponse implements Serializable {
 
     private int id;
     private String city;
